@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QColumnView, QPushButton, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QHeaderView, QPushButton, QSizePolicy,
+    QTableView, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -26,12 +26,15 @@ class Ui_Widget(object):
         self.openFile = QPushButton(Widget)
         self.openFile.setObjectName(u"openFile")
         self.openFile.setGeometry(QRect(0, 0, 75, 24))
-        self.columnView = QColumnView(Widget)
-        self.columnView.setObjectName(u"columnView")
-        self.columnView.setGeometry(QRect(0, 30, 256, 181))
         self.showData = QPushButton(Widget)
         self.showData.setObjectName(u"showData")
         self.showData.setGeometry(QRect(0, 220, 75, 24))
+        self.pushButton = QPushButton(Widget)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(90, 0, 75, 24))
+        self.tableView = QTableView(Widget)
+        self.tableView.setObjectName(u"tableView")
+        self.tableView.setGeometry(QRect(0, 31, 256, 181))
 
         self.retranslateUi(Widget)
 
@@ -42,4 +45,6 @@ class Ui_Widget(object):
         Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Widget", None))
         self.openFile.setText(QCoreApplication.translate("Widget", u"Open", None))
         self.showData.setText(QCoreApplication.translate("Widget", u"Show Data", None))
+        self.pushButton.setText(QCoreApplication.translate("Widget", u"\u0413\u0440\u0430\u0444\u0456\u043a", None))
     # retranslateUi
+

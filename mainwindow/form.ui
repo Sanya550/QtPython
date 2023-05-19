@@ -26,16 +26,6 @@
     <string>Open</string>
    </property>
   </widget>
-  <widget class="QColumnView" name="columnView">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>30</y>
-     <width>256</width>
-     <height>181</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="showData">
    <property name="geometry">
     <rect>
@@ -47,6 +37,29 @@
    </property>
    <property name="text">
     <string>Show Data</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>0</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Графік</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>31</y>
+     <width>256</width>
+     <height>181</height>
+    </rect>
    </property>
   </widget>
  </widget>
