@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>220</y>
+     <y>250</y>
      <width>75</width>
      <height>24</height>
     </rect>
@@ -39,27 +39,79 @@
     <string>Show Data</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="graphDiagramRozkid">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>0</y>
-     <width>75</width>
+     <x>330</x>
+     <y>60</y>
+     <width>181</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Графік</string>
+    <string>Графік діаграм розкиду</string>
    </property>
   </widget>
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>31</y>
-     <width>256</width>
-     <height>181</height>
+     <y>30</y>
+     <width>281</width>
+     <height>211</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="showSummaryStatistics">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>250</y>
+     <width>141</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Show Main characteristic</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>10</y>
+     <width>171</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Графіки:</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="spinBox">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>30</y>
+     <width>42</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="minimum">
+    <number>1</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="graphHystograma">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>30</y>
+     <width>181</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Гістограма</string>
    </property>
   </widget>
  </widget>

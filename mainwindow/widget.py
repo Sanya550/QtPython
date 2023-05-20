@@ -1,14 +1,15 @@
 # This Python file uses the following encoding: utf-8
 import sys
 
-from PySide6.QtWidgets import QApplication, QColumnView, QPushButton, QSizePolicy, QWidget, QFileDialog, QListWidget, QListWidgetItem, QMessageBox
+from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox
 from ui_form import Ui_Widget
 from PySide6.QtGui import QStandardItemModel
 from PySide6.QtGui import QStandardItem
 import pandas as pd
-# import matplotlib.pyplot as plt
-# import numpy as np
-# import math
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -18,12 +19,14 @@ class Widget(QWidget):
 
         self.ui.openFile.clicked.connect(self.open_file)
         self.ui.showData.clicked.connect(self.show_data)
+        self.ui.showSummaryStatistics.clicked.connect(self.show_summary_statistics)
+        self.ui.graphDiagramRozkid.clicked.connect(self.display_scatter_matrix)
+        self.ui.graphHystograma.clicked.connect(self.display_hystograma)
 
         # масив масиву де будуть дані
         self.data = [[]]
 
-    # зчитування
-    def open_file(self):
+    def open_file(self):  # зчитування
         filename, _ = QFileDialog.getOpenFileName(self, "Open File", "", "Text Files (*.txt)")
         if filename:
             self.data = [[]]
@@ -31,9 +34,9 @@ class Widget(QWidget):
                 for line in f:
                     values = [float(val) for val in line.strip().split()]
                     self.data.append(values)
-            self.data.pop(0) # видаляю порожній список з початку
+            self.data.pop(0)  # видаляю порожній список з початку
 
-    def show_data(self):
+    def show_data(self):  # вивід даних
         # перевірка чи масив не пустий
         if not self.data:
             QMessageBox.warning(self, "Error", "No data to display!")
@@ -43,7 +46,6 @@ class Widget(QWidget):
         # Очищення, якщо table view заповнений
         if table_view.model() is not None:
             table_view.setModel(None)
-            table_view.clear()
 
         model = QStandardItemModel()
 
@@ -60,6 +62,50 @@ class Widget(QWidget):
 
         table_view.setModel(model)
         table_view.show()
+
+    def show_summary_statistics(self):  # отримуємо основні дані
+        if not self.data: # верифікація, що self.data не пустий
+            QMessageBox.warning(self, "Error", "No data to display!")
+            return
+
+        tableView = self.ui.tableView
+        tableView.setModel(None) # очищаємо
+        df = pd.DataFrame(self.data)
+        statistics = df.describe()  # отримуємо основні дані
+        model = QStandardItemModel()
+        headers = list(statistics.columns)
+        model.setHorizontalHeaderLabels(headers)
+
+        # Додаємо дані
+        for index, row in enumerate(statistics.index):
+            items = [QStandardItem(str("%.2f" % statistics.loc[row, col])) for col in range(len(headers))]
+            model.appendRow(items)
+        #основні характеристики
+        items = [QStandardItem("Count"), QStandardItem("Mean"), QStandardItem("Std"),
+                 QStandardItem("Min"), QStandardItem("25%"), QStandardItem("50%"),
+                 QStandardItem("75%"), QStandardItem("Max")]
+        model.appendColumn(items)
+
+        tableView.setModel(model)
+        tableView.show()
+
+    def display_scatter_matrix(self): #матриця розкиду
+        df = pd.DataFrame(self.data)
+        file1 = 'data.csv'
+        df.to_csv(file1, index=False) # зберігаю дані в CSV-файлі с ім'ям data.csv
+        data1 = pd.read_csv(file1)
+        fig, ax = plt.subplots(figsize=(8, 8))  # fig - фігура, ах - вісі
+        pd.plotting.scatter_matrix(data1, ax=ax)
+        plt.show()  # Вивід графіка
+
+    def display_hystograma(self): # гістограма
+        number = self.ui.spinBox.value()
+        if number > len(self.data[0]): # верифікація spinBox
+            QMessageBox.warning(None, "Error", "Spin box value must be equal or less than data length")
+        else:
+            plt.hist([row[number - 1] for row in self.data]) # витягуємо стовпчик self.data
+            plt.title("Гістограма для number = %d" % number)
+            plt.show() # Вивід графіка
 
 
 if __name__ == "__main__":

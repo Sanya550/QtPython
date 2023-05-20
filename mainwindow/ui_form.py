@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHeaderView, QPushButton, QSizePolicy,
-    QTableView, QWidget)
+from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QPushButton,
+    QSizePolicy, QSpinBox, QTableView, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -28,13 +28,26 @@ class Ui_Widget(object):
         self.openFile.setGeometry(QRect(0, 0, 75, 24))
         self.showData = QPushButton(Widget)
         self.showData.setObjectName(u"showData")
-        self.showData.setGeometry(QRect(0, 220, 75, 24))
-        self.pushButton = QPushButton(Widget)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(90, 0, 75, 24))
+        self.showData.setGeometry(QRect(0, 250, 75, 24))
+        self.graphDiagramRozkid = QPushButton(Widget)
+        self.graphDiagramRozkid.setObjectName(u"graphDiagramRozkid")
+        self.graphDiagramRozkid.setGeometry(QRect(330, 60, 181, 24))
         self.tableView = QTableView(Widget)
         self.tableView.setObjectName(u"tableView")
-        self.tableView.setGeometry(QRect(0, 31, 256, 181))
+        self.tableView.setGeometry(QRect(0, 30, 281, 211))
+        self.showSummaryStatistics = QPushButton(Widget)
+        self.showSummaryStatistics.setObjectName(u"showSummaryStatistics")
+        self.showSummaryStatistics.setGeometry(QRect(80, 250, 141, 24))
+        self.label = QLabel(Widget)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(340, 10, 171, 16))
+        self.spinBox = QSpinBox(Widget)
+        self.spinBox.setObjectName(u"spinBox")
+        self.spinBox.setGeometry(QRect(530, 30, 42, 22))
+        self.spinBox.setMinimum(1)
+        self.graphHystograma = QPushButton(Widget)
+        self.graphHystograma.setObjectName(u"graphHystograma")
+        self.graphHystograma.setGeometry(QRect(330, 30, 181, 24))
 
         self.retranslateUi(Widget)
 
@@ -45,6 +58,9 @@ class Ui_Widget(object):
         Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Widget", None))
         self.openFile.setText(QCoreApplication.translate("Widget", u"Open", None))
         self.showData.setText(QCoreApplication.translate("Widget", u"Show Data", None))
-        self.pushButton.setText(QCoreApplication.translate("Widget", u"\u0413\u0440\u0430\u0444\u0456\u043a", None))
+        self.graphDiagramRozkid.setText(QCoreApplication.translate("Widget", u"\u0413\u0440\u0430\u0444\u0456\u043a \u0434\u0456\u0430\u0433\u0440\u0430\u043c \u0440\u043e\u0437\u043a\u0438\u0434\u0443", None))
+        self.showSummaryStatistics.setText(QCoreApplication.translate("Widget", u"Show Main characteristic", None))
+        self.label.setText(QCoreApplication.translate("Widget", u"\u0413\u0440\u0430\u0444\u0456\u043a\u0438:", None))
+        self.graphHystograma.setText(QCoreApplication.translate("Widget", u"\u0413\u0456\u0441\u0442\u043e\u0433\u0440\u0430\u043c\u0430", None))
     # retranslateUi
 
