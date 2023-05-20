@@ -5,6 +5,8 @@ from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox
 from ui_form import Ui_Widget
 from PySide6.QtGui import QStandardItemModel
 from PySide6.QtGui import QStandardItem
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel
+from PySide6.QtGui import QPixmap
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,7 +24,7 @@ class Widget(QWidget):
         self.ui.showSummaryStatistics.clicked.connect(self.show_summary_statistics)
         self.ui.graphDiagramRozkid.clicked.connect(self.display_scatter_matrix)
         self.ui.graphHystograma.clicked.connect(self.display_hystograma)
-
+        self.ui.openImage.clicked.connect(self.display_picture)
         # масив масиву де будуть дані
         self.data = [[]]
 
@@ -64,12 +66,12 @@ class Widget(QWidget):
         table_view.show()
 
     def show_summary_statistics(self):  # отримуємо основні дані
-        if not self.data: # верифікація, що self.data не пустий
+        if not self.data:  # верифікація, що self.data не пустий
             QMessageBox.warning(self, "Error", "No data to display!")
             return
 
         tableView = self.ui.tableView
-        tableView.setModel(None) # очищаємо
+        tableView.setModel(None)  # очищаємо
         df = pd.DataFrame(self.data)
         statistics = df.describe()  # отримуємо основні дані
         model = QStandardItemModel()
@@ -80,7 +82,7 @@ class Widget(QWidget):
         for index, row in enumerate(statistics.index):
             items = [QStandardItem(str("%.2f" % statistics.loc[row, col])) for col in range(len(headers))]
             model.appendRow(items)
-        #основні характеристики
+        # основні характеристики
         items = [QStandardItem("Count"), QStandardItem("Mean"), QStandardItem("Std"),
                  QStandardItem("Min"), QStandardItem("25%"), QStandardItem("50%"),
                  QStandardItem("75%"), QStandardItem("Max")]
@@ -89,23 +91,36 @@ class Widget(QWidget):
         tableView.setModel(model)
         tableView.show()
 
-    def display_scatter_matrix(self): #матриця розкиду
+    def display_scatter_matrix(self):  # матриця розкиду
         df = pd.DataFrame(self.data)
         file1 = 'data.csv'
-        df.to_csv(file1, index=False) # зберігаю дані в CSV-файлі с ім'ям data.csv
+        df.to_csv(file1, index=False)  # зберігаю дані в CSV-файлі с ім'ям data.csv
         data1 = pd.read_csv(file1)
         fig, ax = plt.subplots(figsize=(8, 8))  # fig - фігура, ах - вісі
         pd.plotting.scatter_matrix(data1, ax=ax)
         plt.show()  # Вивід графіка
 
-    def display_hystograma(self): # гістограма
+    def display_hystograma(self):  # гістограма
         number = self.ui.spinBox.value()
-        if number > len(self.data[0]): # верифікація spinBox
+        if number > len(self.data[0]):  # верифікація spinBox
             QMessageBox.warning(None, "Error", "Spin box value must be equal or less than data length")
         else:
-            plt.hist([row[number - 1] for row in self.data]) # витягуємо стовпчик self.data
+            plt.hist([row[number - 1] for row in self.data])  # витягуємо стовпчик self.data
             plt.title("Гістограма для number = %d" % number)
-            plt.show() # Вивід графіка
+            plt.show()  # Вивід графіка
+
+    def display_picture(self): # зчитування і відображення фотографії
+        file, check = QFileDialog.getOpenFileName(None, "Select image file", "", "Image Files (*.jpg)")
+        if file:
+            pixmap = QPixmap(file)
+            label = QLabel(self)
+            label.setPixmap(pixmap)
+            label.setScaledContents(True)
+            self.ui.gridLayout.addWidget(label, 0, 0, 1, 1)  # вивід фото
+            width = pixmap.width()
+            height = pixmap.height()
+            self.ui.width_picture.setText("Width = %s" % width)
+            self.ui.height_picture.setText("Height = %s" % height)
 
 
 if __name__ == "__main__":
