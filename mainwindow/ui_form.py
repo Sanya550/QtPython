@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHeaderView, QLabel,
-    QPushButton, QSizePolicy, QSpinBox, QTableView,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QHeaderView,
+    QLabel, QPushButton, QSizePolicy, QSpinBox,
+    QTableView, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
@@ -51,10 +51,10 @@ class Ui_Widget(object):
         self.graphHystograma.setGeometry(QRect(330, 30, 181, 24))
         self.openImage = QPushButton(Widget)
         self.openImage.setObjectName(u"openImage")
-        self.openImage.setGeometry(QRect(0, 330, 131, 24))
+        self.openImage.setGeometry(QRect(0, 330, 161, 24))
         self.gridLayoutWidget = QWidget(Widget)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(140, 330, 451, 261))
+        self.gridLayoutWidget.setGeometry(QRect(260, 320, 521, 271))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -64,6 +64,25 @@ class Ui_Widget(object):
         self.height_picture = QLabel(Widget)
         self.height_picture.setObjectName(u"height_picture")
         self.height_picture.setGeometry(QRect(10, 400, 121, 16))
+        self.comboBox = QComboBox(Widget)
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.addItem('Red')
+        self.comboBox.addItem('Green')
+        self.comboBox.addItem('Blue')
+        self.comboBox.setGeometry(QRect(170, 440, 81, 22))
+        self.distributionColour = QPushButton(Widget)
+        self.distributionColour.setObjectName(u"distributionColour")
+        self.distributionColour.setGeometry(QRect(0, 440, 161, 24))
+        self.greyScale = QPushButton(Widget)
+        self.greyScale.setObjectName(u"greyScale")
+        self.greyScale.setGeometry(QRect(0, 500, 161, 24))
+        self.spinBox_2 = QSpinBox(Widget)
+        self.spinBox_2.setObjectName(u"spinBox_2")
+        self.spinBox_2.setGeometry(QRect(170, 470, 51, 22))
+        self.spinBox_2.setMinimum(5)
+        self.blurGraphs = QPushButton(Widget)
+        self.blurGraphs.setObjectName(u"blurGraphs")
+        self.blurGraphs.setGeometry(QRect(0, 470, 161, 24))
 
         self.retranslateUi(Widget)
 
@@ -74,12 +93,15 @@ class Ui_Widget(object):
         Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Widget", None))
         self.openFile.setText(QCoreApplication.translate("Widget", u"Open txt", None))
         self.showData.setText(QCoreApplication.translate("Widget", u"Show Data", None))
-        self.graphDiagramRozkid.setText(QCoreApplication.translate("Widget", u"\u0413\u0440\u0430\u0444\u0456\u043a \u0434\u0456\u0430\u0433\u0440\u0430\u043c \u0440\u043e\u0437\u043a\u0438\u0434\u0443", None))
+        self.graphDiagramRozkid.setText(QCoreApplication.translate("Widget", u"Scatter plot", None))
         self.showSummaryStatistics.setText(QCoreApplication.translate("Widget", u"Show Main characteristic", None))
         self.label.setText(QCoreApplication.translate("Widget", u"\u0413\u0440\u0430\u0444\u0456\u043a\u0438:", None))
-        self.graphHystograma.setText(QCoreApplication.translate("Widget", u"\u0413\u0456\u0441\u0442\u043e\u0433\u0440\u0430\u043c\u0430", None))
+        self.graphHystograma.setText(QCoreApplication.translate("Widget", u"Hystograma", None))
         self.openImage.setText(QCoreApplication.translate("Widget", u"Open image", None))
         self.width_picture.setText("")
         self.height_picture.setText("")
+        self.distributionColour.setText(QCoreApplication.translate("Widget", u"Color distribution graphs", None))
+        self.greyScale.setText(QCoreApplication.translate("Widget", u"Grey scale graphic", None))
+        self.blurGraphs.setText(QCoreApplication.translate("Widget", u"Blur graphics", None))
     # retranslateUi
 
